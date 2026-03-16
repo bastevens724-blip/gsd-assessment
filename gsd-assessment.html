@@ -1,0 +1,1438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free Organizational Efficiency Assessment — GSD</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #0B1829;
+    --navy-mid: #142338;
+    --navy-light: #1E3350;
+    --gold: #E8A020;
+    --gold-light: #F5B940;
+    --gold-pale: #FDF3E0;
+    --blue-accent: #2563EB;
+    --text-on-navy: #E8EDF3;
+    --text-muted-navy: #8BA0B8;
+    --red: #DC2626;
+    --green: #16A34A;
+    --border: rgba(255,255,255,0.08);
+    --card-bg: rgba(255,255,255,0.04);
+    --transition: 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  html, body {
+    min-height: 100vh;
+    background: var(--navy);
+    color: var(--text-on-navy);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── Layout ── */
+  .shell {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 0 20px 80px;
+  }
+
+  /* ── Header ── */
+  .site-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 24px 0 20px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 48px;
+  }
+
+  .logo {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    font-size: 22px;
+    letter-spacing: -0.02em;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .logo span { color: var(--gold); }
+
+  .header-tag {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--gold);
+    background: rgba(232,160,32,0.12);
+    border: 1px solid rgba(232,160,32,0.25);
+    padding: 5px 12px;
+    border-radius: 100px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  /* ── Progress bar ── */
+  .progress-wrap {
+    margin-bottom: 40px;
+  }
+
+  .progress-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    font-size: 13px;
+    color: var(--text-muted-navy);
+  }
+
+  .progress-meta strong { color: var(--text-on-navy); font-weight: 500; }
+
+  .progress-track {
+    height: 3px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 99px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: var(--gold);
+    border-radius: 99px;
+    transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .step-dots {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+  }
+
+  .step-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.12);
+    transition: var(--transition);
+  }
+
+  .step-dot.done { background: var(--gold); }
+  .step-dot.active { background: var(--gold); width: 20px; border-radius: 3px; }
+
+  /* ── Section heading ── */
+  .section-eyebrow {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+
+  .section-title {
+    font-family: 'Instrument Serif', serif;
+    font-size: 32px;
+    line-height: 1.2;
+    color: #fff;
+    margin-bottom: 10px;
+  }
+
+  .section-sub {
+    color: var(--text-muted-navy);
+    font-size: 15px;
+    margin-bottom: 36px;
+    max-width: 560px;
+  }
+
+  /* ── Form elements ── */
+  .field-group {
+    margin-bottom: 20px;
+  }
+
+  .field-label {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-muted-navy);
+    margin-bottom: 8px;
+    letter-spacing: 0.01em;
+  }
+
+  .field-label .req { color: var(--gold); margin-left: 3px; }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="number"],
+  select,
+  textarea {
+    width: 100%;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 13px 16px;
+    color: #fff;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    outline: none;
+    transition: border-color var(--transition), background var(--transition);
+    -webkit-appearance: none;
+  }
+
+  input:focus, select:focus, textarea:focus {
+    border-color: rgba(232,160,32,0.5);
+    background: rgba(255,255,255,0.06);
+  }
+
+  input::placeholder, textarea::placeholder { color: rgba(139,160,184,0.6); }
+
+  select option { background: #1a2f4a; color: #fff; }
+
+  textarea { resize: vertical; min-height: 90px; }
+
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  @media (max-width: 560px) { .two-col { grid-template-columns: 1fr; } }
+
+  /* ── Choice cards (radio/checkbox) ── */
+  .choice-grid {
+    display: grid;
+    gap: 10px;
+  }
+
+  .choice-grid.cols-2 { grid-template-columns: 1fr 1fr; }
+  .choice-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+
+  @media (max-width: 560px) {
+    .choice-grid.cols-2, .choice-grid.cols-3 { grid-template-columns: 1fr; }
+  }
+
+  .choice-card {
+    position: relative;
+    cursor: pointer;
+  }
+
+  .choice-card input { position: absolute; opacity: 0; width: 0; height: 0; }
+
+  .choice-card-inner {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px 16px;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    transition: border-color var(--transition), background var(--transition);
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .choice-card input:checked + .choice-card-inner {
+    border-color: rgba(232,160,32,0.6);
+    background: rgba(232,160,32,0.07);
+  }
+
+  .choice-card-inner:hover {
+    border-color: rgba(232,160,32,0.3);
+    background: rgba(255,255,255,0.05);
+  }
+
+  .choice-marker {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    border: 1.5px solid rgba(255,255,255,0.2);
+    margin-top: 1px;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .choice-card.checkbox .choice-marker { border-radius: 5px; }
+
+  .choice-card input:checked + .choice-card-inner .choice-marker {
+    background: var(--gold);
+    border-color: var(--gold);
+  }
+
+  .choice-marker-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #fff;
+    opacity: 0;
+    transition: var(--transition);
+  }
+
+  .choice-card.checkbox input:checked + .choice-card-inner .choice-marker-dot {
+    opacity: 1;
+    border-radius: 2px;
+    width: 9px;
+    height: 7px;
+    background: none;
+    border-bottom: 2px solid #fff;
+    border-right: 2px solid #fff;
+    transform: rotate(45deg) translate(-1px, -1px);
+  }
+
+  .choice-card input:not(.checkbox-input):checked + .choice-card-inner .choice-marker-dot { opacity: 1; }
+
+  .choice-text { flex: 1; }
+  .choice-title { font-size: 14px; font-weight: 500; color: #fff; line-height: 1.3; }
+  .choice-desc { font-size: 12px; color: var(--text-muted-navy); margin-top: 2px; line-height: 1.4; }
+
+  /* ── Range slider ── */
+  .range-wrap {
+    padding: 4px 0;
+  }
+
+  input[type="range"] {
+    width: 100%;
+    height: 4px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 99px;
+    border: none;
+    -webkit-appearance: none;
+    outline: none;
+    padding: 0;
+  }
+
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--gold);
+    cursor: pointer;
+    border: 3px solid var(--navy);
+    box-shadow: 0 0 0 1px var(--gold);
+  }
+
+  .range-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px;
+    font-size: 11px;
+    color: var(--text-muted-navy);
+  }
+
+  .range-value {
+    text-align: center;
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+
+  /* ── Divider ── */
+  .form-divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 28px 0;
+  }
+
+  .field-section-title {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-on-navy);
+    letter-spacing: 0.02em;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .field-section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ── Navigation buttons ── */
+  .nav-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 36px;
+    gap: 12px;
+  }
+
+  .btn-back {
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--text-muted-navy);
+    padding: 12px 22px;
+    border-radius: 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    cursor: pointer;
+    transition: var(--transition);
+  }
+
+  .btn-back:hover { border-color: rgba(255,255,255,0.2); color: #fff; }
+
+  .btn-next {
+    background: var(--gold);
+    border: none;
+    color: #0B1829;
+    padding: 13px 28px;
+    border-radius: 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: auto;
+  }
+
+  .btn-next:hover { background: var(--gold-light); }
+  .btn-next:active { transform: scale(0.98); }
+
+  .btn-next svg, .btn-back svg { width: 15px; height: 15px; }
+
+  /* ── Teaser / gate screen ── */
+  .teaser-screen { text-align: center; padding: 20px 0; }
+
+  .score-ring-wrap {
+    display: flex;
+    justify-content: center;
+    margin: 32px 0 28px;
+    position: relative;
+  }
+
+  .score-ring-wrap svg { width: 160px; height: 160px; }
+
+  .score-center {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+
+  .score-number {
+    font-family: 'Instrument Serif', serif;
+    font-size: 44px;
+    color: #fff;
+    line-height: 1;
+  }
+
+  .score-label {
+    font-size: 11px;
+    color: var(--text-muted-navy);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-top: 4px;
+  }
+
+  .score-tier {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 7px 18px;
+    border-radius: 100px;
+    margin: 0 0 28px;
+  }
+
+  .tier-dot { width: 8px; height: 8px; border-radius: 50%; }
+
+  .teaser-insights {
+    display: grid;
+    gap: 10px;
+    margin: 28px 0 36px;
+    text-align: left;
+  }
+
+  .insight-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 18px;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .insight-icon {
+    width: 34px;
+    height: 34px;
+    flex-shrink: 0;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+  }
+
+  .insight-text { font-size: 14px; color: var(--text-muted-navy); line-height: 1.5; }
+  .insight-text strong { color: var(--text-on-navy); display: block; margin-bottom: 2px; font-size: 14px; font-weight: 500; }
+
+  .blurred-preview {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 12px;
+    filter: blur(5px);
+    pointer-events: none;
+    user-select: none;
+    opacity: 0.5;
+    position: relative;
+  }
+
+  .gate-label {
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted-navy);
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  /* ── Gate / contact form ── */
+  .gate-screen {
+    background: rgba(232,160,32,0.06);
+    border: 1px solid rgba(232,160,32,0.2);
+    border-radius: 14px;
+    padding: 32px;
+    margin-top: 8px;
+  }
+
+  .gate-screen .section-title { font-size: 26px; }
+
+  /* ── Final / thank you ── */
+  .final-screen { text-align: center; padding: 24px 0; }
+
+  .checkmark-circle {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    background: rgba(22,163,74,0.15);
+    border: 2px solid rgba(22,163,74,0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 24px;
+    font-size: 28px;
+  }
+
+  .full-report-preview {
+    display: grid;
+    gap: 10px;
+    margin: 28px 0;
+    text-align: left;
+  }
+
+  .report-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    font-size: 14px;
+    color: var(--text-muted-navy);
+  }
+
+  .report-item-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: rgba(232,160,32,0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    flex-shrink: 0;
+  }
+
+  .btn-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--gold);
+    color: #0B1829;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    padding: 15px 32px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    transition: var(--transition);
+    text-decoration: none;
+  }
+
+  .btn-cta:hover { background: var(--gold-light); }
+
+  /* ── Loading ── */
+  .loading-state {
+    text-align: center;
+    padding: 60px 20px;
+  }
+
+  .spinner {
+    width: 44px;
+    height: 44px;
+    border: 3px solid rgba(232,160,32,0.2);
+    border-top-color: var(--gold);
+    border-radius: 50%;
+    margin: 0 auto 20px;
+    animation: spin 0.9s linear infinite;
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .loading-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 24px;
+    text-align: left;
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .loading-step {
+    font-size: 13px;
+    color: var(--text-muted-navy);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    opacity: 0;
+    transition: opacity 0.4s;
+  }
+
+  .loading-step.visible { opacity: 1; }
+  .loading-step.done { color: #16A34A; }
+
+  .loading-step-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: currentColor;
+    flex-shrink: 0;
+  }
+
+  /* ── Error ── */
+  .field-error {
+    font-size: 12px;
+    color: #f87171;
+    margin-top: 6px;
+  }
+
+  .input-error { border-color: rgba(220,38,38,0.5) !important; }
+
+  /* ── Animations ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .step-enter { animation: fadeUp 0.35s ease forwards; }
+
+  /* ── Footer ── */
+  .site-footer {
+    text-align: center;
+    padding: 32px 0 0;
+    font-size: 12px;
+    color: rgba(139,160,184,0.5);
+    border-top: 1px solid var(--border);
+    margin-top: 60px;
+  }
+</style>
+</head>
+<body>
+<div class="shell">
+  <header class="site-header">
+    <div class="logo">G<span>S</span>D</div>
+    <div class="header-tag">Free Assessment</div>
+  </header>
+
+  <div class="progress-wrap" id="progressWrap" style="display:none">
+    <div class="progress-meta">
+      <span id="stepLabel">Step 1 of 5</span>
+      <strong id="stepName">Your Organization</strong>
+    </div>
+    <div class="progress-track">
+      <div class="progress-fill" id="progressFill" style="width:0%"></div>
+    </div>
+    <div class="step-dots" id="stepDots"></div>
+  </div>
+
+  <main id="mainContent"></main>
+
+  <footer class="site-footer">
+    © 2025 GSD &nbsp;·&nbsp; Your data is confidential and used solely to prepare your assessment.
+  </footer>
+</div>
+
+<script>
+const STEPS = [
+  { id: 'intro',     label: 'Start',             name: 'Intro' },
+  { id: 'company',   label: 'Step 1 of 5',       name: 'Your Organization' },
+  { id: 'structure', label: 'Step 2 of 5',       name: 'Org Structure' },
+  { id: 'process',   label: 'Step 3 of 5',       name: 'Process Health' },
+  { id: 'pain',      label: 'Step 4 of 5',       name: 'Challenges & Goals' },
+  { id: 'analyzing', label: 'Step 5 of 5',       name: 'Analyzing…' },
+  { id: 'teaser',    label: 'Your Results',       name: 'Results Preview' },
+  { id: 'gate',      label: 'Unlock Report',     name: 'Get Full Report' },
+  { id: 'done',      label: 'Done',              name: 'Report Sent' },
+];
+
+const data = {};
+let current = 0;
+
+const main = document.getElementById('mainContent');
+const progressWrap = document.getElementById('progressWrap');
+const progressFill = document.getElementById('progressFill');
+const stepLabel    = document.getElementById('stepLabel');
+const stepName     = document.getElementById('stepName');
+const stepDots     = document.getElementById('stepDots');
+
+const DIAGNOSTIC_STEPS = ['company','structure','process','pain'];
+
+function updateProgress() {
+  const s = STEPS[current];
+  const diagIdx = DIAGNOSTIC_STEPS.indexOf(s.id);
+  const showProgress = diagIdx >= 0 || ['analyzing','teaser','gate','done'].includes(s.id);
+  progressWrap.style.display = showProgress ? '' : 'none';
+
+  const total = DIAGNOSTIC_STEPS.length + 1;
+  const filled = diagIdx >= 0 ? ((diagIdx + 1) / total) * 100
+               : ['analyzing','teaser','gate','done'].includes(s.id) ? 100 : 0;
+
+  progressFill.style.width = filled + '%';
+  stepLabel.textContent = s.label;
+  stepName.textContent  = s.name;
+
+  stepDots.innerHTML = '';
+  DIAGNOSTIC_STEPS.forEach((sid, i) => {
+    const d = document.createElement('div');
+    d.className = 'step-dot' + (i < diagIdx ? ' done' : i === diagIdx ? ' active' : '');
+    stepDots.appendChild(d);
+  });
+}
+
+function go(stepId) {
+  current = STEPS.findIndex(s => s.id === stepId);
+  updateProgress();
+  const fn = renders[stepId];
+  if (fn) {
+    main.innerHTML = '';
+    const el = fn();
+    el.classList.add('step-enter');
+    main.appendChild(el);
+  }
+}
+
+/* ─── INTRO ─── */
+const renders = {
+
+intro() {
+  const d = div();
+  d.innerHTML = `
+    <div style="padding: 20px 0 10px;">
+      <div class="section-eyebrow">GSD Advisory</div>
+      <h1 class="section-title" style="font-size:40px;margin-bottom:16px;">
+        Is your organization<br><em>built for efficiency?</em>
+      </h1>
+      <p style="color:var(--text-muted-navy);font-size:16px;max-width:520px;line-height:1.7;margin-bottom:36px;">
+        This 5-minute diagnostic benchmarks your org structure, cost base, and core processes against industry leaders — and pinpoints exactly where you're leaving efficiency on the table.
+      </p>
+      <div style="display:grid;gap:12px;margin-bottom:36px;max-width:480px;">
+        ${['Org structure & spans of control analysis','Process efficiency benchmark (RTR, PTP, OTC, HR, IT)','Cost structure and headcount concentration review','Personalized opportunity roadmap'].map(t => `
+          <div style="display:flex;align-items:center;gap:12px;font-size:14px;color:var(--text-muted-navy);">
+            <div style="width:20px;height:20px;border-radius:50%;background:rgba(232,160,32,0.15);border:1px solid rgba(232,160,32,0.3);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <svg viewBox="0 0 12 12" width="10" height="10" fill="none"><polyline points="2,6 5,9 10,3" stroke="#E8A020" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            ${t}
+          </div>`).join('')}
+      </div>
+      <div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap;">
+        <button class="btn-next" id="startBtn" style="font-size:15px;padding:15px 32px;">
+          Start Free Assessment
+          <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <span style="font-size:13px;color:var(--text-muted-navy);">~5 minutes &nbsp;·&nbsp; No credit card</span>
+      </div>
+    </div>`;
+  d.querySelector('#startBtn').onclick = () => go('company');
+  return d;
+},
+
+/* ─── STEP 1: COMPANY ─── */
+company() {
+  const d = div();
+  d.innerHTML = `
+    <div class="section-eyebrow">About Your Organization</div>
+    <h2 class="section-title">Let's start with the basics</h2>
+    <p class="section-sub">Help us calibrate the benchmark to your industry and scale.</p>
+
+    <div class="two-col">
+      <div class="field-group">
+        <label class="field-label">Company name <span class="req">*</span></label>
+        <input type="text" id="companyName" placeholder="Acme Corporation" value="${data.companyName||''}">
+        <div class="field-error" id="err-companyName"></div>
+      </div>
+      <div class="field-group">
+        <label class="field-label">Website</label>
+        <input type="text" id="website" placeholder="acme.com" value="${data.website||''}">
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="field-group">
+        <label class="field-label">Industry <span class="req">*</span></label>
+        <select id="industry">
+          <option value="">Select industry…</option>
+          ${['Financial Services','Healthcare & Life Sciences','Manufacturing','Technology & SaaS','Professional Services','Retail & Consumer Goods','Energy & Utilities','Government & Public Sector','Logistics & Supply Chain','Other'].map(i=>`<option value="${i}" ${data.industry===i?'selected':''}>${i}</option>`).join('')}
+        </select>
+        <div class="field-error" id="err-industry"></div>
+      </div>
+      <div class="field-group">
+        <label class="field-label">Annual revenue <span class="req">*</span></label>
+        <select id="revenue">
+          <option value="">Select range…</option>
+          ${['Under $10M','$10M – $50M','$50M – $150M','$150M – $500M','$500M – $1B','Over $1B'].map(r=>`<option value="${r}" ${data.revenue===r?'selected':''}>${r}</option>`).join('')}
+        </select>
+        <div class="field-error" id="err-revenue"></div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="field-group">
+        <label class="field-label">Number of employees <span class="req">*</span></label>
+        <select id="headcount">
+          <option value="">Select range…</option>
+          ${['Under 50','50 – 200','200 – 500','500 – 1,000','1,000 – 5,000','Over 5,000'].map(h=>`<option value="${h}" ${data.headcount===h?'selected':''}>${h}</option>`).join('')}
+        </select>
+        <div class="field-error" id="err-headcount"></div>
+      </div>
+      <div class="field-group">
+        <label class="field-label">Number of countries / locations</label>
+        <select id="geographies">
+          <option value="">Select…</option>
+          ${['1 (single site)','2 – 5','6 – 20','21 – 50','50+'].map(g=>`<option value="${g}" ${data.geographies===g?'selected':''}>${g}</option>`).join('')}
+        </select>
+      </div>
+    </div>
+
+    <div class="field-group">
+      <label class="field-label">Your role / title</label>
+      <select id="roleTitle">
+        <option value="">Select role…</option>
+        ${['CEO / President','CFO','COO','CHRO','CIO / CTO','VP / Director of Finance','VP / Director of Operations','VP / Director of HR','Transformation / Strategy Lead','Management Consultant','Other'].map(r=>`<option value="${r}" ${data.roleTitle===r?'selected':''}>${r}</option>`).join('')}
+      </select>
+    </div>
+
+    <div class="nav-row">
+      <button class="btn-next" id="nextBtn">
+        Continue
+        <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>`;
+
+  d.querySelector('#nextBtn').onclick = () => {
+    const fields = ['companyName','industry','revenue','headcount'];
+    let ok = true;
+    fields.forEach(f => {
+      const v = d.querySelector('#'+f).value.trim();
+      const err = d.querySelector('#err-'+f);
+      if (!v) { err.textContent = 'This field is required'; d.querySelector('#'+f).classList.add('input-error'); ok = false; }
+      else { err.textContent=''; d.querySelector('#'+f).classList.remove('input-error'); }
+    });
+    if (!ok) return;
+    ['companyName','website','industry','revenue','headcount','geographies','roleTitle'].forEach(f => {
+      data[f] = d.querySelector('#'+f).value.trim();
+    });
+    go('structure');
+  };
+  return d;
+},
+
+/* ─── STEP 2: ORG STRUCTURE ─── */
+structure() {
+  const d = div();
+  d.innerHTML = `
+    <div class="section-eyebrow">Org Structure</div>
+    <h2 class="section-title">How is your team structured?</h2>
+    <p class="section-sub">These questions map your hierarchy, management ratios, and decision-making efficiency.</p>
+
+    <div class="field-group">
+      <label class="field-label">How many reporting layers exist from CEO to frontline?</label>
+      <div class="choice-grid cols-3">
+        ${['1–3 layers','4–5 layers','6–7 layers','8–9 layers','10+ layers','Not sure'].map(o => choiceCard(o, 'layers', data.layers===o)).join('')}
+      </div>
+    </div>
+
+    <hr class="form-divider">
+
+    <div class="field-group">
+      <label class="field-label">Average direct reports per manager (span of control)</label>
+      <div class="choice-grid cols-3">
+        ${['Fewer than 4','4–6','7–10','11–15','More than 15','Unknown'].map(o => choiceCard(o, 'span', data.span===o)).join('')}
+      </div>
+    </div>
+
+    <hr class="form-divider">
+
+    <div class="field-group">
+      <label class="field-label">Which functions are currently centralized or shared? (Select all that apply)</label>
+      <div class="choice-grid cols-2">
+        ${['Finance & Accounting','HR & Payroll','IT & Helpdesk','Procurement','Legal & Compliance','Customer Service / Operations','None — fully decentralized','Not sure'].map(o => choiceCard(o, 'shared', data.shared&&data.shared.includes(o), true)).join('')}
+      </div>
+    </div>
+
+    <hr class="form-divider">
+
+    <div class="field-group">
+      <label class="field-label">How would you describe your organizational model?</label>
+      <div class="choice-grid">
+        ${[
+          ['Functional','Siloed by function (Finance, HR, Ops, etc.)'],
+          ['Divisional','Organized by product, geography, or business unit'],
+          ['Matrix','Dual reporting lines across functions and business units'],
+          ['Flat / Agile','Minimal hierarchy, self-organizing teams'],
+          ['Hybrid','Combination of the above'],
+        ].map(([t,d2]) => choiceCard(t, 'orgModel', data.orgModel===t, false, d2)).join('')}
+      </div>
+    </div>
+
+    <div class="nav-row">
+      <button class="btn-back" onclick="go('company')">← Back</button>
+      <button class="btn-next" id="nextBtn">
+        Continue
+        <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>`;
+
+  wireChoices(d);
+  d.querySelector('#nextBtn').onclick = () => {
+    collectChoices(d);
+    go('process');
+  };
+  return d;
+},
+
+/* ─── STEP 3: PROCESS ─── */
+process() {
+  const d = div();
+  d.innerHTML = `
+    <div class="section-eyebrow">Process Health</div>
+    <h2 class="section-title">How do your core processes perform?</h2>
+    <p class="section-sub">Rate the efficiency and maturity of your key business processes.</p>
+
+    ${[
+      ['Finance — Record to Report (RTR)', 'rtr', 'Monthly close cycle, financial reporting, consolidation'],
+      ['Finance — Procure to Pay (PTP)',   'ptp', 'Purchase requisition through vendor payment'],
+      ['Finance — Order to Cash (OTC)',    'otc', 'Order management through cash collection'],
+      ['Human Resources',                  'hr',  'Hiring, onboarding, payroll, performance'],
+      ['IT & Systems',                     'it',  'Infrastructure, helpdesk, software delivery'],
+    ].map(([label, key, hint]) => `
+      <div class="field-group" style="margin-bottom:28px;">
+        <label class="field-label">${label}</label>
+        <div style="font-size:12px;color:var(--text-muted-navy);margin-bottom:10px;">${hint}</div>
+        <div class="choice-grid cols-3">
+          ${[
+            ['Highly manual','Limited automation, error-prone'],
+            ['Partially automated','Some tools, inconsistent'],
+            ['Mostly automated','Streamlined with minor gaps'],
+            ['Best-in-class','Fully optimized, data-driven'],
+            ['Not applicable',''],
+          ].map(([t, d2]) => choiceCard(t, key, data[key]===t, false, d2)).join('')}
+        </div>
+      </div>`).join('')}
+
+    <hr class="form-divider">
+
+    <div class="field-group">
+      <label class="field-label">What is your approximate monthly financial close cycle time?</label>
+      <div class="choice-grid cols-3">
+        ${['1–3 days','4–5 days','6–10 days','11–15 days','More than 15 days','Unknown'].map(o => choiceCard(o, 'closeTime', data.closeTime===o)).join('')}
+      </div>
+    </div>
+
+    <hr class="form-divider">
+
+    <div class="field-group">
+      <label class="field-label">What percentage of finance processes are automated today?</label>
+      <div class="range-value" id="autoVal">${data.automationPct||20}%</div>
+      <div class="range-wrap">
+        <input type="range" min="0" max="100" step="5" id="automationPct" value="${data.automationPct||20}">
+        <div class="range-labels"><span>0%</span><span>50%</span><span>100%</span></div>
+      </div>
+    </div>
+
+    <div class="nav-row">
+      <button class="btn-back" onclick="go('structure')">← Back</button>
+      <button class="btn-next" id="nextBtn">
+        Continue
+        <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>`;
+
+  wireChoices(d);
+
+  const slider = d.querySelector('#automationPct');
+  const autoVal = d.querySelector('#autoVal');
+  slider.oninput = () => { autoVal.textContent = slider.value + '%'; };
+
+  d.querySelector('#nextBtn').onclick = () => {
+    collectChoices(d);
+    data.automationPct = slider.value;
+    go('pain');
+  };
+  return d;
+},
+
+/* ─── STEP 4: PAIN POINTS ─── */
+pain() {
+  const d = div();
+  d.innerHTML = `
+    <div class="section-eyebrow">Challenges & Goals</div>
+    <h2 class="section-title">What's driving this assessment?</h2>
+    <p class="section-sub">Understanding your priorities helps us focus the analysis on what matters most to you.</p>
+
+    <div class="field-group">
+      <label class="field-label">What are your top organizational challenges right now? (Select all that apply)</label>
+      <div class="choice-grid cols-2">
+        ${[
+          'High cost of operations / overhead',
+          'Slow decision-making',
+          'Duplicated effort across teams',
+          'Inconsistent process execution',
+          'Lack of visibility into data / reporting',
+          'Difficulty scaling the org',
+          'High employee turnover',
+          'Integration challenges (M&A / systems)',
+          'Board / investor pressure to reduce costs',
+          'Upcoming transformation or restructure',
+        ].map(o => choiceCard(o, 'challenges', data.challenges&&data.challenges.includes(o), true)).join('')}
+      </div>
+    </div>
+
+    <hr class="form-divider">
+
+    <div class="field-group">
+      <label class="field-label">What is your primary goal for this assessment?</label>
+      <div class="choice-grid">
+        ${[
+          ['Reduce operating costs','Looking for quick wins and structural savings'],
+          ['Build a business case','Need data to justify a transformation or restructure'],
+          ['Benchmark performance','Want to understand how we compare to peers'],
+          ['Explore outsourcing / co-sourcing','Evaluating what could be done better externally'],
+          ['Prepare for growth','Planning to scale and want the right structure first'],
+        ].map(([t,d2]) => choiceCard(t,'primaryGoal',data.primaryGoal===t,false,d2)).join('')}
+      </div>
+    </div>
+
+    <hr class="form-divider">
+
+    <div class="field-group">
+      <label class="field-label">What is the anticipated timeframe for making changes?</label>
+      <div class="choice-grid cols-3">
+        ${['Immediately (0–3 months)','Short-term (3–6 months)','Medium-term (6–12 months)','Long-term (12+ months)','Exploring / no fixed timeline',''].filter(Boolean).map(o => choiceCard(o,'timeline',data.timeline===o)).join('')}
+      </div>
+    </div>
+
+    <hr class="form-divider">
+
+    <div class="field-group">
+      <label class="field-label">Estimated annual budget for efficiency / transformation initiatives</label>
+      <div class="choice-grid cols-2">
+        ${['Under $100K','$100K – $500K','$500K – $1M','$1M – $5M','Over $5M','Not yet determined'].map(o => choiceCard(o,'budget',data.budget===o)).join('')}
+      </div>
+    </div>
+
+    <div class="field-group" style="margin-top:24px;">
+      <label class="field-label">Anything else you'd like us to know?</label>
+      <textarea id="notes" placeholder="Key context, constraints, or specific areas of concern…">${data.notes||''}</textarea>
+    </div>
+
+    <div class="nav-row">
+      <button class="btn-back" onclick="go('process')">← Back</button>
+      <button class="btn-next" id="nextBtn" style="font-size:15px;padding:14px 28px;">
+        Analyze My Organization →
+      </button>
+    </div>`;
+
+  wireChoices(d);
+  d.querySelector('#nextBtn').onclick = () => {
+    collectChoices(d);
+    data.notes = d.querySelector('#notes').value.trim();
+    go('analyzing');
+  };
+  return d;
+},
+
+/* ─── ANALYZING ─── */
+analyzing() {
+  const d = div();
+  d.innerHTML = `
+    <div class="loading-state">
+      <div class="spinner"></div>
+      <p style="font-size:18px;font-weight:500;color:#fff;margin-bottom:8px;">Analyzing your organization…</p>
+      <p style="font-size:14px;color:var(--text-muted-navy);">Benchmarking against ${data.industry||'your industry'} peers</p>
+      <div class="loading-steps">
+        <div class="loading-step" id="ls1"><div class="loading-step-dot"></div>Mapping org structure & hierarchy</div>
+        <div class="loading-step" id="ls2"><div class="loading-step-dot"></div>Running process maturity benchmark</div>
+        <div class="loading-step" id="ls3"><div class="loading-step-dot"></div>Identifying cost concentration patterns</div>
+        <div class="loading-step" id="ls4"><div class="loading-step-dot"></div>Scoring automation & co-source opportunities</div>
+        <div class="loading-step" id="ls5"><div class="loading-step-dot"></div>Preparing your efficiency scorecard</div>
+      </div>
+    </div>`;
+
+  let idx = 0;
+  const steps = [1,2,3,4,5].map(i => d.querySelector('#ls'+i));
+  const show = () => {
+    if (idx < steps.length) {
+      steps[idx].classList.add('visible');
+      if (idx > 0) steps[idx-1].classList.add('done');
+      idx++;
+      setTimeout(show, 900);
+    } else {
+      runAnalysis().then(() => go('teaser'));
+    }
+  };
+  setTimeout(show, 400);
+  return d;
+},
+
+/* ─── TEASER ─── */
+teaser() {
+  const score = window._score || 62;
+  const tier = score >= 80 ? {label:'High Performer',color:'#16A34A',bg:'rgba(22,163,74,0.12)',border:'rgba(22,163,74,0.25)'}
+             : score >= 55 ? {label:'Developing',color:'#E8A020',bg:'rgba(232,160,32,0.12)',border:'rgba(232,160,32,0.25)'}
+                           : {label:'Significant Opportunity',color:'#DC2626',bg:'rgba(220,38,38,0.12)',border:'rgba(220,38,38,0.25)'};
+
+  const r = 60, cx = 80, cy = 80, circ = 2 * Math.PI * r;
+  const filled = (score / 100) * circ;
+
+  const insights = window._insights || [
+    {icon:'🏗️', title:'Org structure complexity', body:'Your hierarchy appears wider than industry norms for your size, suggesting potential span-of-control issues.'},
+    {icon:'⚙️', title:'Process automation gap', body:`At ${data.automationPct||20}% automation, there is material opportunity to reduce manual effort in finance operations.`},
+    {icon:'💡', title:'Co-sourcing potential', body:'Based on your process maturity profile, 2–3 functions show strong indicators for shared service or co-sourcing models.'},
+  ];
+
+  const d = div();
+  d.innerHTML = `
+    <div class="teaser-screen">
+      <div class="section-eyebrow">Your Efficiency Scorecard</div>
+      <h2 class="section-title" style="font-size:30px;">${data.companyName||'Your Organization'}</h2>
+
+      <div class="score-ring-wrap">
+        <svg viewBox="0 0 160 160">
+          <circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="rgba(255,255,255,0.07)" stroke-width="12"/>
+          <circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="${tier.color}" stroke-width="12"
+            stroke-dasharray="${filled} ${circ}" stroke-dashoffset="${circ/4}"
+            stroke-linecap="round" style="transition:stroke-dasharray 1.2s ease;"/>
+        </svg>
+        <div class="score-center">
+          <div class="score-number">${score}</div>
+          <div class="score-label">/ 100</div>
+        </div>
+      </div>
+
+      <div class="score-tier" style="background:${tier.bg};border:1px solid ${tier.border};color:${tier.color};margin:0 auto 28px;">
+        <div class="tier-dot" style="background:${tier.color};"></div>
+        ${tier.label}
+      </div>
+
+      <div class="teaser-insights">
+        ${insights.map(ins => `
+          <div class="insight-card">
+            <div class="insight-icon" style="background:rgba(255,255,255,0.05);">${ins.icon}</div>
+            <div class="insight-text">
+              <strong>${ins.title}</strong>
+              ${ins.body}
+            </div>
+          </div>`).join('')}
+      </div>
+
+      <div class="gate-label">🔒 &nbsp;Full report includes 12 additional findings</div>
+
+      <div class="blurred-preview">
+        <div style="display:grid;gap:8px;">
+          <div style="height:14px;background:rgba(255,255,255,0.08);border-radius:4px;width:70%;"></div>
+          <div style="height:10px;background:rgba(255,255,255,0.05);border-radius:4px;width:90%;"></div>
+          <div style="height:10px;background:rgba(255,255,255,0.05);border-radius:4px;width:60%;"></div>
+          <div style="height:14px;background:rgba(255,255,255,0.08);border-radius:4px;width:55%;margin-top:8px;"></div>
+          <div style="height:10px;background:rgba(255,255,255,0.05);border-radius:4px;width:80%;"></div>
+        </div>
+      </div>
+
+      <button class="btn-next" onclick="go('gate')" style="margin:0 auto;font-size:15px;padding:15px 32px;">
+        Unlock Full Report — Free
+        <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <p style="font-size:12px;color:var(--text-muted-navy);margin-top:12px;">We'll email you the full findings + schedule a free 30-min review call.</p>
+    </div>`;
+  return d;
+},
+
+/* ─── GATE ─── */
+gate() {
+  const d = div();
+  d.innerHTML = `
+    <div class="gate-screen">
+      <div class="section-eyebrow">Almost there</div>
+      <h2 class="section-title" style="font-size:26px;">Get your full efficiency report</h2>
+      <p style="color:var(--text-muted-navy);font-size:14px;margin-bottom:28px;line-height:1.6;">
+        Enter your details below and we'll send your personalized report within minutes, along with a complimentary 30-minute debrief with a GSD advisor.
+      </p>
+
+      <div class="two-col">
+        <div class="field-group">
+          <label class="field-label">First name <span class="req">*</span></label>
+          <input type="text" id="firstName" placeholder="Jane" value="${data.firstName||''}">
+          <div class="field-error" id="err-firstName"></div>
+        </div>
+        <div class="field-group">
+          <label class="field-label">Last name <span class="req">*</span></label>
+          <input type="text" id="lastName" placeholder="Smith" value="${data.lastName||''}">
+          <div class="field-error" id="err-lastName"></div>
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label class="field-label">Business email <span class="req">*</span></label>
+        <input type="email" id="email" placeholder="jane.smith@company.com" value="${data.email||''}">
+        <div class="field-error" id="err-email"></div>
+      </div>
+
+      <div class="two-col">
+        <div class="field-group">
+          <label class="field-label">Phone number</label>
+          <input type="tel" id="phone" placeholder="+1 (555) 000-0000" value="${data.phone||''}">
+        </div>
+        <div class="field-group">
+          <label class="field-label">LinkedIn profile URL</label>
+          <input type="text" id="linkedin" placeholder="linkedin.com/in/janesmith" value="${data.linkedin||''}">
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label class="field-label">Preferred time for a follow-up call</label>
+        <select id="callPref">
+          <option value="">Select preference…</option>
+          ${['Morning (8am–12pm)','Afternoon (12pm–4pm)','Late afternoon (4pm–6pm)','Flexible / any time','Email only — no call'].map(o=>`<option value="${o}" ${data.callPref===o?'selected':''}>${o}</option>`).join('')}
+        </select>
+      </div>
+
+      <div style="display:flex;align-items:flex-start;gap:10px;margin-bottom:20px;margin-top:4px;">
+        <input type="checkbox" id="consent" style="width:16px;height:16px;margin-top:3px;flex-shrink:0;accent-color:var(--gold);" ${data.consent?'checked':''}>
+        <label for="consent" style="font-size:12px;color:var(--text-muted-navy);line-height:1.5;cursor:pointer;">
+          I agree to be contacted by GSD regarding my assessment results and related advisory services. We respect your privacy and will never share your data with third parties.
+        </label>
+      </div>
+
+      <div class="field-error" id="err-consent" style="margin-bottom:12px;"></div>
+
+      <button class="btn-next" id="submitBtn" style="width:100%;justify-content:center;font-size:15px;padding:16px;">
+        Send Me My Full Report
+        <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+
+      <p style="font-size:11px;color:rgba(139,160,184,0.5);text-align:center;margin-top:14px;">
+        By submitting, you agree to GSD's privacy policy. No spam, ever.
+      </p>
+    </div>`;
+
+  d.querySelector('#submitBtn').onclick = () => {
+    const reqs = ['firstName','lastName','email'];
+    let ok = true;
+    reqs.forEach(f => {
+      const el = d.querySelector('#'+f);
+      const err = d.querySelector('#err-'+f);
+      if (!el.value.trim()) { err.textContent='Required'; el.classList.add('input-error'); ok=false; }
+      else { err.textContent=''; el.classList.remove('input-error'); }
+    });
+    const emailEl = d.querySelector('#email');
+    if (emailEl.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailEl.value)) {
+      d.querySelector('#err-email').textContent='Enter a valid email'; emailEl.classList.add('input-error'); ok=false;
+    }
+    if (!d.querySelector('#consent').checked) {
+      d.querySelector('#err-consent').textContent='Please accept to continue'; ok=false;
+    } else { d.querySelector('#err-consent').textContent=''; }
+    if (!ok) return;
+
+    ['firstName','lastName','email','phone','linkedin','callPref'].forEach(f => {
+      data[f] = d.querySelector('#'+f).value.trim();
+    });
+    data.consent = true;
+
+    submitLead();
+    go('done');
+  };
+  return d;
+},
+
+/* ─── DONE ─── */
+done() {
+  const d = div();
+  d.innerHTML = `
+    <div class="final-screen">
+      <div class="checkmark-circle">✓</div>
+      <h2 class="section-title" style="font-size:28px;margin-bottom:12px;">You're all set, ${data.firstName||'there'}.</h2>
+      <p style="color:var(--text-muted-navy);font-size:16px;margin-bottom:36px;max-width:480px;margin-left:auto;margin-right:auto;line-height:1.7;">
+        Your full efficiency report is being prepared and will arrive at <strong style="color:var(--text-on-navy);">${data.email}</strong> within the next few minutes.
+      </p>
+
+      <div class="full-report-preview">
+        ${[
+          ['📊','Executive summary','Efficiency score breakdown with benchmark comparison'],
+          ['🗺️','Opportunity roadmap','Prioritized list of structural and process improvements'],
+          ['💰','Cost optimization view','Estimated savings potential by function and initiative type'],
+          ['🤝','Co-sourcing analysis','Functions and processes best suited for shared services or outsourcing'],
+          ['📅','Next steps','Recommended 90-day action plan tailored to your goals'],
+        ].map(([icon,title,desc]) => `
+          <div class="report-item">
+            <div class="report-item-icon">${icon}</div>
+            <div>
+              <div style="font-weight:500;color:var(--text-on-navy);font-size:14px;margin-bottom:2px;">${title}</div>
+              <div style="font-size:13px;">${desc}</div>
+            </div>
+          </div>`).join('')}
+      </div>
+
+      <p style="color:var(--text-muted-navy);font-size:14px;margin-bottom:20px;">
+        A GSD advisor will also reach out to schedule your complimentary 30-minute debrief.
+      </p>
+      <a href="https://gsd.com" class="btn-cta">
+        Learn more about GSD
+        <svg viewBox="0 0 16 16" width="15" height="15" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>`;
+  return d;
+},
+
+}; // end renders
+
+/* ─── Helpers ─── */
+function div() {
+  const el = document.createElement('div');
+  return el;
+}
+
+function choiceCard(label, name, checked=false, multi=false, desc='') {
+  const type = multi ? 'checkbox' : 'radio';
+  return `
+    <label class="choice-card${multi?' checkbox':''}">
+      <input type="${type}" name="${name}" value="${label}" ${checked?'checked':''}>
+      <div class="choice-card-inner">
+        <div class="choice-marker"><div class="choice-marker-dot"></div></div>
+        <div class="choice-text">
+          <div class="choice-title">${label}</div>
+          ${desc ? `<div class="choice-desc">${desc}</div>` : ''}
+        </div>
+      </div>
+    </label>`;
+}
+
+function wireChoices(container) {
+  container.querySelectorAll('.choice-card input').forEach(inp => {
+    inp.addEventListener('change', () => {
+      if (inp.type === 'radio') {
+        container.querySelectorAll(`input[name="${inp.name}"]`).forEach(r => {
+          r.closest('.choice-card').querySelector('.choice-card-inner').style.borderColor = '';
+        });
+      }
+    });
+  });
+}
+
+function collectChoices(container) {
+  const radios = {};
+  const checkboxes = {};
+  container.querySelectorAll('.choice-card input').forEach(inp => {
+    if (inp.type === 'radio' && inp.checked) radios[inp.name] = inp.value;
+    if (inp.type === 'checkbox' && inp.checked) {
+      if (!checkboxes[inp.name]) checkboxes[inp.name] = [];
+      checkboxes[inp.name].push(inp.value);
+    }
+  });
+  Object.assign(data, radios, checkboxes);
+}
+
+/* ─── AI Analysis ─── */
+async function runAnalysis() {
+  const prompt = `You are an organizational efficiency expert at GSD Advisory. Analyze this company's diagnostic data and return ONLY valid JSON.
+
+Company: ${data.companyName}, ${data.industry}, ${data.headcount} employees, ${data.revenue} revenue
+Org model: ${data.orgModel||'Unknown'}, Layers: ${data.layers||'Unknown'}, Span: ${data.span||'Unknown'}
+Shared functions: ${(data.shared||[]).join(', ')||'None specified'}
+Process maturity — RTR: ${data.rtr||'?'}, PTP: ${data.ptp||'?'}, OTC: ${data.otc||'?'}, HR: ${data.hr||'?'}, IT: ${data.it||'?'}
+Close cycle: ${data.closeTime||'Unknown'}, Automation: ${data.automationPct||20}%
+Challenges: ${(data.challenges||[]).join(', ')||'Not specified'}
+Primary goal: ${data.primaryGoal||'Not specified'}
+Budget: ${data.budget||'Unknown'}, Timeline: ${data.timeline||'Unknown'}
+
+Return ONLY this JSON (no markdown, no backticks):
+{
+  "score": <integer 0-100 reflecting overall efficiency maturity>,
+  "insights": [
+    {"icon": "<single emoji>", "title": "<short title>", "body": "<2 sentence insight specific to their data>"},
+    {"icon": "<single emoji>", "title": "<short title>", "body": "<2 sentence insight specific to their data>"},
+    {"icon": "<single emoji>", "title": "<short title>", "body": "<2 sentence insight specific to their data>"}
+  ]
+}`;
+
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        messages: [{ role: 'user', content: prompt }]
+      })
+    });
+    const json = await res.json();
+    const text = json.content?.[0]?.text || '';
+    const parsed = JSON.parse(text);
+    window._score = parsed.score;
+    window._insights = parsed.insights;
+  } catch(e) {
+    window._score = 58;
+    window._insights = [
+      {icon:'🏗️', title:'Org structure opportunity', body:`For a ${data.headcount||'mid-size'} organization in ${data.industry||'your industry'}, we've identified structural patterns worth reviewing — particularly around spans of control and reporting layers.`},
+      {icon:'⚙️', title:'Process automation gap', body:`At ${data.automationPct||20}% automation, there is meaningful opportunity to reduce manual effort in finance operations and accelerate your close cycle.`},
+      {icon:'💡', title:'Co-sourcing potential', body:`Your process maturity profile and organizational model suggest 2–3 functions are well-suited for a shared services or co-sourcing arrangement.`},
+    ];
+  }
+}
+
+/* ─── Lead submission ─── */
+function submitLead() {
+  const payload = { ...data, score: window._score, insights: window._insights, submittedAt: new Date().toISOString() };
+  fetch('/submit-lead', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  }).catch(err => console.error('Lead submission failed:', err));
+}
+
+/* ─── Boot ─── */
+go('intro');
+</script>
+</body>
+</html>
