@@ -17,3 +17,6 @@ npm-debug.log*
 
 # Lock file (optional — keep if you want reproducible installs)
 # package-lock.json
+
+# Local Netlify folder
+.netlify
