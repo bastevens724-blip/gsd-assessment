@@ -681,6 +681,15 @@
     margin-top: 60px;
   }
 </style>
+
+<!-- Microsoft Clarity -->
+<script type="text/javascript">
+  (function(c,l,a,r,i,t,y){
+    c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+    t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+  })(window, document, "clarity", "script", "CLARITY_ID"); /* Replace CLARITY_ID with your ID from clarity.microsoft.com */
+</script>
 </head>
 <body>
 <div class="shell">
@@ -754,7 +763,17 @@ function updateProgress() {
   });
 }
 
+function trackStep(stepId) {
+  if (typeof clarity !== 'undefined') {
+    clarity("event", "step_" + stepId);
+  }
+  if (typeof gtag !== 'undefined') {
+    gtag('event', 'assessment_step', { step: stepId });
+  }
+}
+
 function go(stepId) {
+  trackStep(stepId);
   current = STEPS.findIndex(s => s.id === stepId);
   updateProgress();
   const fn = renders[stepId];
@@ -797,7 +816,7 @@ intro() {
         <span style="font-size:13px;color:var(--text-muted-navy);">~5 minutes &nbsp;·&nbsp; No credit card</span>
       </div>
     </div>`;
-  d.querySelector('#startBtn').onclick = () => go('company');
+  d.querySelector('#startBtn').onclick = () => { trackStep('started'); go('company'); };
   return d;
 },
 
@@ -1132,7 +1151,7 @@ analyzing() {
       idx++;
       setTimeout(show, 900);
     } else {
-      runAnalysis().then(() => go('teaser'));
+      runAnalysis().then(() => { trackStep('saw_teaser'); go('teaser'); });
     }
   };
   setTimeout(show, 400);
@@ -1202,7 +1221,7 @@ teaser() {
         </div>
       </div>
 
-      <button class="btn-gold" onclick="go('gate')" style="margin:0 auto;font-size:15px;padding:15px 32px;">
+      <button class="btn-gold" onclick="trackStep('clicked_unlock'); go('gate');" style="margin:0 auto;font-size:15px;padding:15px 32px;">
         Unlock Full Report — Free
         <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
@@ -1302,6 +1321,7 @@ gate() {
     });
     data.consent = true;
 
+    trackStep('submitted');
     submitLead();
     go('done');
   };
