@@ -1321,14 +1321,15 @@ done() {
         Schedule a Call with GSD
         <svg viewBox="0 0 16 16" width="15" height="15" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </a>
-      <script>
-        (function() {
-          var subject = encodeURIComponent('Following up \u2014 ' + (data.companyName||'') + ' Efficiency Assessment');
-          var body = encodeURIComponent('Hi Ben,\n\nI just completed the GSD Organizational Efficiency Assessment for ' + (data.companyName||'') + ' and scored ' + (window._score||'N/A') + '/100.\n\nI\u2019d love to schedule a quick call to discuss the findings.\n\nBest,\n' + (data.firstName||'') + ' ' + (data.lastName||'') + '\n' + (data.email||'') + '\n' + (data.phone||''));
-          document.getElementById('schedule-cta').href = 'mailto:bstevens@gsdsol.com?subject=' + subject + '&body=' + body;
-        })();
-      </script>
     </div>`;
+
+  // Set mailto href after innerHTML is set (can't use <script> inside template literals)
+  const schedCta = d.querySelector('#schedule-cta');
+  if (schedCta) {
+    const subject = encodeURIComponent('Following up \u2014 ' + (data.companyName||'') + ' Efficiency Assessment');
+    const body = encodeURIComponent('Hi Ben,\n\nI just completed the GSD Organizational Efficiency Assessment for ' + (data.companyName||'') + ' and scored ' + (window._score||'N/A') + '/100.\n\nI\u2019d love to schedule a quick call to discuss the findings.\n\nBest,\n' + (data.firstName||'') + ' ' + (data.lastName||'') + '\n' + (data.email||'') + '\n' + (data.phone||''));
+    schedCta.href = 'mailto:bstevens@gsdsol.com?subject=' + subject + '&body=' + body;
+  }
   return d;
 },
 
