@@ -10,18 +10,18 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --navy: #0B1829;
-    --navy-mid: #142338;
-    --navy-light: #1E3350;
-    --gold: #E8A020;
-    --gold-light: #F5B940;
-    --gold-pale: #FDF3E0;
-    --blue-accent: #2563EB;
-    --text-on-navy: #E8EDF3;
-    --text-muted-navy: #8BA0B8;
+    --navy:         #0D1B2A;
+    --cobalt:       #1B5EA8;
+    --cobalt-dark:  #154D8E;
+    --cobalt-light: #2470C4;
+    --gold:         #F5A623;
+    --gold-light:   #F7B84B;
+    --logo-red:     #D63B2F;
+    --text-on-navy: #E8EEF5;
+    --text-muted-navy: #7A96B4;
     --red: #DC2626;
     --green: #16A34A;
-    --border: rgba(255,255,255,0.08);
+    --border: rgba(255,255,255,0.07);
     --card-bg: rgba(255,255,255,0.04);
     --transition: 0.22s cubic-bezier(0.4, 0, 0.2, 1);
   }
@@ -49,7 +49,8 @@
     align-items: center;
     justify-content: space-between;
     padding: 24px 0 20px;
-    border-bottom: 1px solid var(--border);
+    background: var(--cobalt);
+    border-bottom: 3px solid var(--gold);
     margin-bottom: 48px;
   }
 
@@ -70,8 +71,8 @@
     font-size: 12px;
     font-weight: 500;
     color: var(--gold);
-    background: rgba(232,160,32,0.12);
-    border: 1px solid rgba(232,160,32,0.25);
+    background: rgba(245,166,35,0.15);
+    border: 1px solid rgba(245,166,35,0.35);
     padding: 5px 12px;
     border-radius: 100px;
     letter-spacing: 0.04em;
@@ -103,7 +104,7 @@
 
   .progress-fill {
     height: 100%;
-    background: var(--gold);
+    background: var(--cobalt);
     border-radius: 99px;
     transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   }
@@ -122,7 +123,7 @@
     transition: var(--transition);
   }
 
-  .step-dot.done { background: var(--gold); }
+  .step-dot.done { background: var(--cobalt); }
   .step-dot.active { background: var(--gold); width: 20px; border-radius: 3px; }
 
   /* ── Section heading ── */
@@ -186,13 +187,13 @@
   }
 
   input:focus, select:focus, textarea:focus {
-    border-color: rgba(232,160,32,0.5);
+    border-color: rgba(27,94,168,0.7);
     background: rgba(255,255,255,0.06);
   }
 
   input::placeholder, textarea::placeholder { color: rgba(139,160,184,0.6); }
 
-  select option { background: #1a2f4a; color: #fff; }
+  select option { background: #0D1B2A; color: #fff; }
 
   textarea { resize: vertical; min-height: 90px; }
 
@@ -238,12 +239,12 @@
   }
 
   .choice-card input:checked + .choice-card-inner {
-    border-color: rgba(232,160,32,0.6);
-    background: rgba(232,160,32,0.07);
+    border-color: rgba(27,94,168,0.65);
+    background: rgba(27,94,168,0.1);
   }
 
   .choice-card-inner:hover {
-    border-color: rgba(232,160,32,0.3);
+    border-color: rgba(27,94,168,0.35);
     background: rgba(255,255,255,0.05);
   }
 
@@ -263,8 +264,8 @@
   .choice-card.checkbox .choice-marker { border-radius: 5px; }
 
   .choice-card input:checked + .choice-card-inner .choice-marker {
-    background: var(--gold);
-    border-color: var(--gold);
+    background: var(--cobalt);
+    border-color: var(--cobalt);
   }
 
   .choice-marker-dot {
@@ -314,10 +315,10 @@
     width: 20px;
     height: 20px;
     border-radius: 50%;
-    background: var(--gold);
+    background: var(--cobalt);
     cursor: pointer;
     border: 3px solid var(--navy);
-    box-shadow: 0 0 0 1px var(--gold);
+    box-shadow: 0 0 0 1px var(--cobalt);
   }
 
   .range-labels {
@@ -332,7 +333,7 @@
     text-align: center;
     font-size: 22px;
     font-weight: 500;
-    color: var(--gold);
+    color: var(--cobalt-light);
     margin-bottom: 8px;
   }
 
@@ -385,9 +386,9 @@
   .btn-back:hover { border-color: rgba(255,255,255,0.2); color: #fff; }
 
   .btn-next {
-    background: var(--gold);
+    background: var(--cobalt);
     border: none;
-    color: #0B1829;
+    color: #fff;
     padding: 13px 28px;
     border-radius: 10px;
     font-family: 'DM Sans', sans-serif;
@@ -401,8 +402,28 @@
     margin-left: auto;
   }
 
-  .btn-next:hover { background: var(--gold-light); }
+  .btn-next:hover { background: var(--cobalt-dark); }
   .btn-next:active { transform: scale(0.98); }
+
+  .btn-gold {
+    background: var(--gold);
+    border: none;
+    color: var(--navy);
+    padding: 13px 28px;
+    border-radius: 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: auto;
+  }
+
+  .btn-gold:hover { background: var(--gold-light); }
+  .btn-gold:active { transform: scale(0.98); }
 
   .btn-next svg, .btn-back svg { width: 15px; height: 15px; }
 
@@ -509,8 +530,8 @@
 
   /* ── Gate / contact form ── */
   .gate-screen {
-    background: rgba(232,160,32,0.06);
-    border: 1px solid rgba(232,160,32,0.2);
+    background: rgba(27,94,168,0.07);
+    border: 1px solid rgba(27,94,168,0.25);
     border-radius: 14px;
     padding: 32px;
     margin-top: 8px;
@@ -557,7 +578,7 @@
     width: 32px;
     height: 32px;
     border-radius: 8px;
-    background: rgba(232,160,32,0.12);
+    background: rgba(27,94,168,0.14);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -569,8 +590,8 @@
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    background: var(--gold);
-    color: #0B1829;
+    background: var(--cobalt);
+    color: #fff;
     font-family: 'DM Sans', sans-serif;
     font-size: 15px;
     font-weight: 500;
@@ -582,7 +603,7 @@
     text-decoration: none;
   }
 
-  .btn-cta:hover { background: var(--gold-light); }
+  .btn-cta:hover { background: var(--cobalt-dark); }
 
   /* ── Loading ── */
   .loading-state {
@@ -593,8 +614,8 @@
   .spinner {
     width: 44px;
     height: 44px;
-    border: 3px solid rgba(232,160,32,0.2);
-    border-top-color: var(--gold);
+    border: 3px solid rgba(27,94,168,0.2);
+    border-top-color: var(--cobalt);
     border-radius: 50%;
     margin: 0 auto 20px;
     animation: spin 0.9s linear infinite;
@@ -654,7 +675,8 @@
     text-align: center;
     padding: 32px 0 0;
     font-size: 12px;
-    color: rgba(139,160,184,0.5);
+    color: rgba(232,238,245,0.5);
+    background: var(--cobalt);
     border-top: 1px solid var(--border);
     margin-top: 60px;
   }
@@ -663,7 +685,7 @@
 <body>
 <div class="shell">
   <header class="site-header">
-    <div class="logo">G<span>S</span>D</div>
+    <div class="logo">G<span>S</span><span style="color:#D63B2F">D</span></div>
     <div class="header-tag">Free Assessment</div>
   </header>
 
@@ -761,8 +783,8 @@ intro() {
       <div style="display:grid;gap:12px;margin-bottom:36px;max-width:480px;">
         ${['Org structure & spans of control analysis','Process efficiency benchmark (RTR, PTP, OTC, HR, IT)','Cost structure and headcount concentration review','Personalized opportunity roadmap'].map(t => `
           <div style="display:flex;align-items:center;gap:12px;font-size:14px;color:var(--text-muted-navy);">
-            <div style="width:20px;height:20px;border-radius:50%;background:rgba(232,160,32,0.15);border:1px solid rgba(232,160,32,0.3);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-              <svg viewBox="0 0 12 12" width="10" height="10" fill="none"><polyline points="2,6 5,9 10,3" stroke="#E8A020" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <div style="width:20px;height:20px;border-radius:50%;background:rgba(27,94,168,0.15);border:1px solid rgba(27,94,168,0.35);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <svg viewBox="0 0 12 12" width="10" height="10" fill="none"><polyline points="2,6 5,9 10,3" stroke="#2470C4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </div>
             ${t}
           </div>`).join('')}
@@ -1121,7 +1143,7 @@ analyzing() {
 teaser() {
   const score = window._score || 62;
   const tier = score >= 80 ? {label:'High Performer',color:'#16A34A',bg:'rgba(22,163,74,0.12)',border:'rgba(22,163,74,0.25)'}
-             : score >= 55 ? {label:'Developing',color:'#E8A020',bg:'rgba(232,160,32,0.12)',border:'rgba(232,160,32,0.25)'}
+             : score >= 55 ? {label:'Developing',color:'#F5A623',bg:'rgba(245,166,35,0.12)',border:'rgba(245,166,35,0.25)'}
                            : {label:'Significant Opportunity',color:'#DC2626',bg:'rgba(220,38,38,0.12)',border:'rgba(220,38,38,0.25)'};
 
   const r = 60, cx = 80, cy = 80, circ = 2 * Math.PI * r;
@@ -1160,7 +1182,7 @@ teaser() {
       <div class="teaser-insights">
         ${insights.map(ins => `
           <div class="insight-card">
-            <div class="insight-icon" style="background:rgba(255,255,255,0.05);">${ins.icon}</div>
+            <div class="insight-icon" style="background:rgba(27,94,168,0.12);">${ins.icon}</div>
             <div class="insight-text">
               <strong>${ins.title}</strong>
               ${ins.body}
@@ -1180,7 +1202,7 @@ teaser() {
         </div>
       </div>
 
-      <button class="btn-next" onclick="go('gate')" style="margin:0 auto;font-size:15px;padding:15px 32px;">
+      <button class="btn-gold" onclick="go('gate')" style="margin:0 auto;font-size:15px;padding:15px 32px;">
         Unlock Full Report — Free
         <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
